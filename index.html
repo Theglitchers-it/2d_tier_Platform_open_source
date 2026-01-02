@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Platform Game - Mad Lab</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1>🎮 RETRO PLATFORMER</h1>
+            <div class="game-stats">
+                <div class="stat">
+                    <span class="stat-label">SCORE</span>
+                    <span class="stat-value" id="score">0000</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">LIVES</span>
+                    <span class="stat-value" id="lives">❤️❤️❤️</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">LEVEL</span>
+                    <span class="stat-value" id="level">01</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">TIME</span>
+                    <span class="stat-value" id="timer">999</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="game-screen">
+            <canvas id="game-canvas"></canvas>
+
+            <!-- Game Over Screen -->
+            <div class="overlay" id="game-over-screen">
+                <div class="overlay-content">
+                    <h2>GAME OVER</h2>
+                    <p class="final-score">Final Score: <span id="final-score">0</span></p>
+                    <button class="btn-restart" id="restart-btn">RESTART</button>
+                </div>
+            </div>
+
+            <!-- Start Screen -->
+            <div class="overlay active" id="start-screen">
+                <div class="overlay-content">
+                    <h2>🎮 RETRO PLATFORMER</h2>
+                    <div class="game-info">
+                        <h3>HOW TO PLAY</h3>
+                        <div class="controls">
+                            <p>⬅️ ➡️ Arrow Keys - Move</p>
+                            <p>SPACE - Jump</p>
+                            <p>ESC - Pause</p>
+                        </div>
+                        <div class="objectives">
+                            <h4>OBJECTIVES:</h4>
+                            <p>⭐ Collect stars for points</p>
+                            <p>💎 Grab power-ups for bonus</p>
+                            <p>🚩 Reach the flag to win</p>
+                            <p>⚠️ Avoid enemies!</p>
+                        </div>
+                    </div>
+                    <button class="btn-start" id="start-btn">START GAME</button>
+                </div>
+            </div>
+
+            <!-- Pause Screen -->
+            <div class="overlay" id="pause-screen">
+                <div class="overlay-content">
+                    <h2>PAUSED</h2>
+                    <button class="btn-resume" id="resume-btn">RESUME</button>
+                    <button class="btn-restart" id="pause-restart-btn">RESTART</button>
+                </div>
+            </div>
+
+            <!-- Level Complete Screen -->
+            <div class="overlay" id="level-complete-screen">
+                <div class="overlay-content">
+                    <h2>🎉 LEVEL COMPLETE!</h2>
+                    <p class="level-score">Score: <span id="level-score">0</span></p>
+                    <p class="bonus">Time Bonus: <span id="time-bonus">0</span></p>
+                    <button class="btn-next" id="next-level-btn">NEXT LEVEL</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls-info">
+            <div class="control-hint">
+                <span class="key">⬅️ ➡️</span> Move
+            </div>
+            <div class="control-hint">
+                <span class="key">SPACE</span> Jump
+            </div>
+            <div class="control-hint">
+                <span class="key">ESC</span> Pause
+            </div>
+        </div>
+
+        <!-- Mobile Controls -->
+        <div class="mobile-controls" id="mobile-controls">
+            <button class="mobile-btn" id="btn-left">⬅️</button>
+            <button class="mobile-btn" id="btn-jump">⬆️</button>
+            <button class="mobile-btn" id="btn-right">➡️</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
