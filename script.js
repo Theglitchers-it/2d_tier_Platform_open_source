@@ -37,6 +37,16 @@ class PlatformGame {
         // Input
         this.keys = {};
 
+        // Joystick
+        this.joystick = {
+            active: false,
+            x: 0,
+            y: 0,
+            centerX: 0,
+            centerY: 0,
+            maxDistance: 35
+        };
+
         // Game objects
         this.platforms = [];
         this.enemies = [];
@@ -92,25 +102,81 @@ class PlatformGame {
             this.nextLevel();
         });
 
-        // Mobile controls
-        document.getElementById('btn-left').addEventListener('touchstart', () => {
-            this.keys['ArrowLeft'] = true;
-        });
-        document.getElementById('btn-left').addEventListener('touchend', () => {
+        // Virtual Joystick
+        const joystickStick = document.getElementById('joystick-stick');
+        const joystickBase = document.querySelector('.joystick-base');
+
+        const handleJoystickStart = (e) => {
+            e.preventDefault();
+            this.joystick.active = true;
+
+            const rect = joystickBase.getBoundingClientRect();
+            this.joystick.centerX = rect.left + rect.width / 2;
+            this.joystick.centerY = rect.top + rect.height / 2;
+        };
+
+        const handleJoystickMove = (e) => {
+            if (!this.joystick.active) return;
+            e.preventDefault();
+
+            const touch = e.touches ? e.touches[0] : e;
+            const deltaX = touch.clientX - this.joystick.centerX;
+            const deltaY = touch.clientY - this.joystick.centerY;
+
+            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+            const angle = Math.atan2(deltaY, deltaX);
+
+            const limitedDistance = Math.min(distance, this.joystick.maxDistance);
+
+            this.joystick.x = limitedDistance * Math.cos(angle);
+            this.joystick.y = limitedDistance * Math.sin(angle);
+
+            // Update stick position
+            joystickStick.style.transform = `translate(${this.joystick.x}px, ${this.joystick.y}px)`;
+
+            // Update movement keys based on joystick position
+            const threshold = 10;
+            this.keys['ArrowLeft'] = this.joystick.x < -threshold;
+            this.keys['ArrowRight'] = this.joystick.x > threshold;
+        };
+
+        const handleJoystickEnd = (e) => {
+            e.preventDefault();
+            this.joystick.active = false;
+            this.joystick.x = 0;
+            this.joystick.y = 0;
+
+            // Reset stick position
+            joystickStick.style.transform = 'translate(0px, 0px)';
+
+            // Clear movement keys
             this.keys['ArrowLeft'] = false;
-        });
-
-        document.getElementById('btn-right').addEventListener('touchstart', () => {
-            this.keys['ArrowRight'] = true;
-        });
-        document.getElementById('btn-right').addEventListener('touchend', () => {
             this.keys['ArrowRight'] = false;
-        });
+        };
 
-        document.getElementById('btn-jump').addEventListener('touchstart', () => {
+        // Only add touch events for mobile
+        joystickBase.addEventListener('touchstart', handleJoystickStart);
+        joystickBase.addEventListener('touchmove', handleJoystickMove);
+        joystickBase.addEventListener('touchend', handleJoystickEnd);
+        joystickBase.addEventListener('touchcancel', handleJoystickEnd);
+
+        // Jump button
+        document.getElementById('btn-jump').addEventListener('touchstart', (e) => {
+            e.preventDefault();
             if (this.player.grounded) {
                 this.player.velocityY = -this.player.jumpPower;
             }
+        });
+
+        // Prevent canvas touch scrolling
+        this.canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+        });
+        this.canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+        });
+        this.canvas.addEventListener('touchend', (e) => {
+            e.preventDefault();
         });
     }
 

@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Retro Platform Game - Mad Lab</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -99,9 +99,15 @@
 
         <!-- Mobile Controls -->
         <div class="mobile-controls" id="mobile-controls">
-            <button class="mobile-btn" id="btn-left">⬅️</button>
-            <button class="mobile-btn" id="btn-jump">⬆️</button>
-            <button class="mobile-btn" id="btn-right">➡️</button>
+            <!-- Virtual Joystick -->
+            <div class="joystick-container" id="joystick-container">
+                <div class="joystick-base">
+                    <div class="joystick-stick" id="joystick-stick"></div>
+                </div>
+            </div>
+
+            <!-- Jump Button -->
+            <button class="mobile-btn jump-btn" id="btn-jump">⬆️</button>
         </div>
     </div>
 
