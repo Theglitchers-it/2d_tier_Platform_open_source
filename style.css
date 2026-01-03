@@ -119,6 +119,9 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 100;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
 }
 
 .overlay.active {
@@ -133,6 +136,7 @@ body {
     border: 4px solid #00d9ff;
     box-shadow: 0 0 40px rgba(0, 217, 255, 0.5);
     max-width: 500px;
+    margin: auto;
 }
 
 .overlay-content h2 {
@@ -376,6 +380,17 @@ body {
         height: 400px;
     }
 
+    .overlay {
+        align-items: flex-start;
+        padding: 20px 0;
+    }
+
+    .overlay-content {
+        padding: 30px 20px;
+        margin: 20px;
+        max-width: 90%;
+    }
+
     .overlay-content h2 {
         font-size: 2rem;
     }
@@ -412,6 +427,29 @@ body {
         height: 300px;
     }
 
+    .overlay {
+        padding: 10px 0;
+    }
+
+    .overlay-content {
+        padding: 20px 15px;
+        margin: 10px;
+        max-width: 95%;
+    }
+
+    .overlay-content h2 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+    .game-info h3 {
+        font-size: 1.2rem;
+    }
+
+    .controls p, .objectives p {
+        font-size: 0.9rem;
+    }
+
     .joystick-base {
         width: 100px;
         height: 100px;
@@ -431,19 +469,6 @@ body {
     .mobile-controls {
         padding: 15px;
         gap: 15px;
-    }
-
-    .overlay-content {
-        padding: 20px;
-        max-width: 90%;
-    }
-
-    .game-info h3 {
-        font-size: 1.2rem;
-    }
-
-    .controls p, .objectives p {
-        font-size: 0.9rem;
     }
 }
 
