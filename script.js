@@ -252,12 +252,14 @@ class PlatformGame {
         this.gameState = 'playing';
         this.hideAllScreens();
         this.startTimer();
+        document.body.classList.add('game-active');
         this.gameLoop();
     }
 
     pauseGame() {
         this.gameState = 'paused';
         document.getElementById('pause-screen').classList.add('active');
+        document.body.classList.remove('game-active');
         this.stopTimer();
         cancelAnimationFrame(this.animationId);
     }
@@ -266,6 +268,7 @@ class PlatformGame {
         this.gameState = 'playing';
         this.hideAllScreens();
         this.startTimer();
+        document.body.classList.add('game-active');
         this.gameLoop();
     }
 
@@ -291,6 +294,7 @@ class PlatformGame {
         this.gameState = 'gameover';
         this.stopTimer();
         cancelAnimationFrame(this.animationId);
+        document.body.classList.remove('game-active');
         document.getElementById('final-score').textContent = this.score;
         document.getElementById('game-over-screen').classList.add('active');
     }
@@ -299,6 +303,7 @@ class PlatformGame {
         this.gameState = 'levelcomplete';
         this.stopTimer();
         cancelAnimationFrame(this.animationId);
+        document.body.classList.remove('game-active');
 
         const timeBonus = this.time * 10;
         this.score += timeBonus;

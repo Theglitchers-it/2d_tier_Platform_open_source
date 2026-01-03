@@ -20,10 +20,14 @@ body {
 /* Mobile-specific body styles */
 @media (max-width: 768px) {
     body {
-        overflow: hidden;
-        touch-action: none;
         -webkit-user-select: none;
         user-select: none;
+    }
+
+    /* Prevent overflow only when game is active */
+    body.game-active {
+        overflow: hidden;
+        touch-action: none;
     }
 }
 
@@ -96,9 +100,9 @@ body {
     image-rendering: crisp-edges;
 }
 
-/* Canvas touch settings only for mobile */
+/* Canvas touch settings only for mobile and only when playing */
 @media (max-width: 768px) {
-    #game-canvas {
+    body.game-active #game-canvas {
         touch-action: none;
     }
 }
